@@ -1,0 +1,10 @@
+{
+  "deployment_id": "borealis-v1.8",
+  "model_version": "1.8.0",
+  "owner_team": "support-automation",
+  "runtime": "halcyon-serve/3.2",
+  "traffic_share": 0.27,
+  "deployed": "2025-08-21",
+  "status": "serving",
+  "last_sweep": "2026-05-18"
+}

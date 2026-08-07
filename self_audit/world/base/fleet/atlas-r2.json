@@ -1,0 +1,10 @@
+{
+  "deployment_id": "atlas-r2",
+  "model_version": "2.4.1",
+  "owner_team": "search-ranking",
+  "runtime": "halcyon-serve/3.2",
+  "traffic_share": 0.19,
+  "deployed": "2025-11-03",
+  "status": "serving",
+  "last_sweep": "2026-05-18"
+}

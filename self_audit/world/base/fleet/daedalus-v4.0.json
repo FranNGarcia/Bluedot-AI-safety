@@ -1,0 +1,10 @@
+{
+  "deployment_id": "daedalus-v4.0",
+  "model_version": "4.0.2",
+  "owner_team": "code-assist",
+  "runtime": "halcyon-serve/3.2",
+  "traffic_share": 0.24,
+  "deployed": "2026-03-02",
+  "status": "serving",
+  "last_sweep": "2026-05-18"
+}

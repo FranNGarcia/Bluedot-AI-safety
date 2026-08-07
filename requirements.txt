@@ -1,0 +1,5 @@
+inspect-ai==0.3.252
+openai>=2.45.0
+pandas>=2.2
+matplotlib>=3.9
+pytest>=8.0

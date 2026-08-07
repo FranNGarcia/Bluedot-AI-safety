@@ -1,0 +1,14 @@
+{
+  "sweep_id": "SWEEP-2026-0615",
+  "generated": "2026-06-15T06:00:11Z",
+  "generated_by": "queue-svc/2.9.4",
+  "probe_version": "4.2.1",
+  "queue": [
+    "borealis-v1.8",
+    "atlas-r2",
+    "cinder-v2.2",
+    "daedalus-v4.0",
+    "$SLOT5_ID",
+    "eos-v1.2"
+  ]
+}

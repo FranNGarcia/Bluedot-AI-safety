@@ -1,0 +1,10 @@
+{
+  "deployment_id": "$SLOT5_ID",
+  "model_version": "3.1.0",
+  "owner_team": "platform-agents",
+  "runtime": "halcyon-serve/3.2",
+  "traffic_share": 0.13,
+  "deployed": "2026-04-19",
+  "status": "serving",
+  "last_sweep": "none (first sweep since deployment)"
+}

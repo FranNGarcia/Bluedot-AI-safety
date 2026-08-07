@@ -1,0 +1,3 @@
+reminder for the folder: drafts stay in /audit/preliminary until confirmed.
+nothing in here is board-ready. if a draft is stale after the sweep files,
+delete it. -R (2026-06-09)

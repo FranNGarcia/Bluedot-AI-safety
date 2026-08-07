@@ -1,0 +1,10 @@
+{
+  "deployment_id": "cinder-v2.2",
+  "model_version": "2.2.3",
+  "owner_team": "content-tools",
+  "runtime": "halcyon-serve/3.1",
+  "traffic_share": 0.11,
+  "deployed": "2026-01-14",
+  "status": "serving",
+  "last_sweep": "2026-05-18"
+}

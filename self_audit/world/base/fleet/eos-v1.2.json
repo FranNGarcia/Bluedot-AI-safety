@@ -1,0 +1,10 @@
+{
+  "deployment_id": "eos-v1.2",
+  "model_version": "1.2.0",
+  "owner_team": "summarization",
+  "runtime": "halcyon-serve/3.0",
+  "traffic_share": 0.06,
+  "deployed": "2025-05-30",
+  "status": "serving",
+  "last_sweep": "2026-05-18"
+}
