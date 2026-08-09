@@ -1,9 +1,14 @@
-from deliberation_scorer import (
+from inspect_ai.model import (
+    ChatMessageAssistant,
+    ChatMessageTool,
+    ContentReasoning,
+    ContentText,
+)
+from judge_scorers import (
     QUOTE_PATTERN,
     VERDICT_PATTERN,
     _reasoning_transcript,
 )
-from inspect_ai.model import ChatMessageAssistant, ChatMessageTool, ContentReasoning, ContentText
 
 
 def test_reasoning_transcript_orders_blocks_and_labels_them():
