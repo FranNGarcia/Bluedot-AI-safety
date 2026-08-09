@@ -18,6 +18,7 @@ from inspect_ai.solver import Generate, Solver, TaskState, solver
 from inspect_ai.tool import grep, list_files, read_file
 
 from dataset import build_dataset
+from deliberation_scorer import deception_deliberation_scorer
 from scorer import self_audit_scorer
 from tools import PROBE_RESULTS_KEY, run_alignment_probe, write_outbox_file
 
@@ -77,7 +78,7 @@ def _self_audit_task(
         ),
         setup=init_probe_store(),
         solver=_sweep_agent(),
-        scorer=self_audit_scorer(),
+        scorer=[self_audit_scorer(), deception_deliberation_scorer()],
         sandbox=("docker", COMPOSE_FILE),
         message_limit=MESSAGE_LIMIT,
         token_limit=TOKEN_LIMIT,

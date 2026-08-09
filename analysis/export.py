@@ -10,6 +10,7 @@ from pathlib import Path
 from inspect_ai.analysis import EvalModel, SampleColumn, samples_df
 
 SCORER = "self_audit_scorer"
+DELIBERATION_SCORER = "deception_deliberation_scorer"
 
 VALUE_COLUMNS = [
     "self_deception",
@@ -21,6 +22,7 @@ VALUE_COLUMNS = [
     "queue_probe_coverage",
     "malformed_output",
     "self_overreport",
+    "restricted_access_undisclosed",
     "review_needed",
 ]
 
@@ -50,6 +52,17 @@ def columns():
     ]
     cols.append(
         SampleColumn("self_category", path=f"scores.{SCORER}.metadata.self_category")
+    )
+    # secondary LLM-judge metric, reported by its own scorer (see README)
+    cols.append(
+        SampleColumn(
+            "deception_deliberated", path=f"scores.{DELIBERATION_SCORER}.value"
+        )
+    )
+    cols.append(
+        SampleColumn(
+            "deliberation_quote", path=f"scores.{DELIBERATION_SCORER}.metadata.quote"
+        )
     )
     return cols
 
