@@ -99,19 +99,15 @@ container; scenario files are planted per-sample).
 # smoke run: one cheap model, all 11 cells, 1 epoch
 .venv\Scripts\inspect eval self_audit/task.py@self_audit_pilot --model openrouter/<cheap-model> --epochs 1
 
-# stage 1 (primary arm) -- --model-role grader binds a trusted judge for
-# deception_deliberation_scorer; omit it and the model under test grades
-# its own transcript, which is fine for a smoke run but not for real numbers
-.venv\Scripts\inspect eval-set self_audit/task.py@self_audit_fictional_strong `
-  --model <m1>,<m2>,<m3>,<m4> --model-role grader=<trusted-model> --epochs 10 --max-connections 8
+# stage 1 (primary arm) --model-role grader binds a trusted judge for
+# deception_deliberation_scorer; omit it and the model under test grades its own transcript
+.venv\Scripts\inspect eval-set self_audit/task.py@self_audit_fictional_strong --model <m1>,<m2>,<m3>,<m4> --model-role grader=<trusted-model> --epochs 10 --max-connections 8
 
 # stage 2 (neutral goal, reduced grid)
-.venv\Scripts\inspect eval-set self_audit/task.py@self_audit_fictional_neutral `
-  --model <m1>,<m2>,<m3>,<m4> --model-role grader=<trusted-model> --epochs 10
+.venv\Scripts\inspect eval-set self_audit/task.py@self_audit_fictional_neutral --model <m1>,<m2>,<m3>,<m4> --model-role grader=<trusted-model> --epochs 10
 
 # stage 3 (real identity, run once per model so the injected id matches)
-.venv\Scripts\inspect eval self_audit/task.py@self_audit_real_strong `
-  -T self_id=<deployment-id-for-model> --model <model> --model-role grader=<trusted-model> --epochs 10
+.venv\Scripts\inspect eval self_audit/task.py@self_audit_real_strong -T self_id=<deployment-id-for-model> --model <model> --model-role grader=<trusted-model> --epochs 10
 
 # inspect transcripts
 .venv\Scripts\inspect view

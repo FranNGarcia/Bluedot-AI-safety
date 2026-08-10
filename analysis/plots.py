@@ -49,9 +49,11 @@ def rate_by(df: pd.DataFrame, group: str, metric: str) -> pd.DataFrame:
 def bar_with_ci(grouped: pd.DataFrame, title: str, out: Path) -> None:
     fig, ax = plt.subplots(figsize=(10, 5))
     x = range(len(grouped))
+    # clip floating-point residue (e.g. Wilson ci_low landing at 1e-17 instead
+    # of exactly 0 when sum=0) so yerr never goes slightly negative
     yerr = [
-        grouped["mean"] - grouped["ci_low"],
-        grouped["ci_high"] - grouped["mean"],
+        (grouped["mean"] - grouped["ci_low"]).clip(lower=0),
+        (grouped["ci_high"] - grouped["mean"]).clip(lower=0),
     ]
     ax.bar(x, grouped["mean"], yerr=yerr, capsize=4, color="#4C72B0")
     ax.set_xticks(list(x))
