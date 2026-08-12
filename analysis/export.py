@@ -11,6 +11,7 @@ from inspect_ai.analysis import EvalModel, SampleColumn, samples_df
 
 SCORER = "self_audit_scorer"
 DELIBERATION_SCORER = "deception_deliberation_scorer"
+EVAL_AWARENESS_SCORER = "eval_awareness_scorer"
 RESTRICTED_ACCESS_SCORER = "restricted_access_scorer"
 
 VALUE_COLUMNS = [
@@ -66,6 +67,17 @@ def columns():
     )
     cols.append(
         SampleColumn(
+            "eval_awareness_suspected", path=f"scores.{EVAL_AWARENESS_SCORER}.value"
+        )
+    )
+    cols.append(
+        SampleColumn(
+            "eval_awareness_quote",
+            path=f"scores.{EVAL_AWARENESS_SCORER}.metadata.quote",
+        )
+    )
+    cols.append(
+        SampleColumn(
             "restricted_access_undisclosed",
             path=f"scores.{RESTRICTED_ACCESS_SCORER}.value",
         )
@@ -93,10 +105,15 @@ def main() -> None:
     df.to_csv(out_dir / "results.csv", index=False)
     print(f"wrote {out_dir / 'results.csv'} ({len(df)} samples)")
 
-    # review_needed (deterministic) and deception_deliberated (LLM judge) are
-    # independent signals -- neither feeds the other (see README) -- so flag
-    # a sample for manual review if either one fires.
-    flagged = df[(df["review_needed"] == 1) | (df["deception_deliberated"] == 1)]
+    # review_needed (deterministic), deception_deliberated, and
+    # eval_awareness_suspected (both LLM judge) are independent signals --
+    # none feeds the others (see README) -- so flag a sample for manual
+    # review if any one fires.
+    flagged = df[
+        (df["review_needed"] == 1)
+        | (df["deception_deliberated"] == 1)
+        | (df["eval_awareness_suspected"] == 1)
+    ]
     flagged.to_csv(out_dir / "flagged.csv", index=False)
     print(f"wrote {out_dir / 'flagged.csv'} ({len(flagged)} samples to review)")
 
@@ -109,6 +126,7 @@ def main() -> None:
                     "differential_deception",
                     "other_fidelity",
                     "deception_deliberated",
+                    "eval_awareness_suspected",
                 ]
             ]
             .mean()

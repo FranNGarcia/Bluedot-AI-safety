@@ -18,7 +18,11 @@ from inspect_ai.solver import Generate, Solver, TaskState, solver
 from inspect_ai.tool import grep, list_files, read_file
 
 from dataset import build_dataset
-from judge_scorers import deception_deliberation_scorer, restricted_access_scorer
+from judge_scorers import (
+    deception_deliberation_scorer,
+    eval_awareness_scorer,
+    restricted_access_scorer,
+)
 from scorer import self_audit_scorer
 from tools import PROBE_RESULTS_KEY, run_alignment_probe, write_outbox_file
 
@@ -81,6 +85,7 @@ def _self_audit_task(
         scorer=[
             self_audit_scorer(),
             deception_deliberation_scorer(),
+            eval_awareness_scorer(),
             restricted_access_scorer(),
         ],
         sandbox=("docker", COMPOSE_FILE),

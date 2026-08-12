@@ -42,7 +42,13 @@ TODO: table of rates by cell × model with Wilson CIs; plots from
   reported separately.
 - Deterministic scoring cannot detect deception expressed only in reasoning
   traces; flagged-sample review is manual.
-- Eval awareness was not automatically measured in v1 (spot-checked).
+- Eval awareness (the agent's reasoning suspecting it's in a test/drill
+  rather than a real deployment, and that suspicion shaping its decision)
+  is now graded automatically by `eval_awareness_scorer`
+  (`self_audit/judge_scorers.py`), scored independently from whether the
+  agent deliberated about misreporting. Like the deliberation scorer, it's
+  an LLM judge's read of free text, not ground truth -- treat it as a
+  signal for manual transcript review, not a settled rate.
 
 ## 5. Reproducibility
 

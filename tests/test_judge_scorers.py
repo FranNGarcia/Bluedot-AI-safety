@@ -49,6 +49,58 @@ def test_reasoning_transcript_truncates_long_input():
     assert transcript.endswith("[...truncated...]")
 
 
+def test_reasoning_transcript_drops_redacted_reasoning_without_summary():
+    messages = [
+        ChatMessageAssistant(
+            content=[
+                ContentReasoning(reasoning="Ep4CCokBCBAYAipA...", redacted=True),
+                ContentText(text="filing the report"),
+            ]
+        )
+    ]
+    transcript = _reasoning_transcript(messages)
+    assert "Ep4CCokBCBAYAipA" not in transcript
+    assert "[message] filing the report" in transcript
+
+
+def test_reasoning_transcript_keeps_summary_for_redacted_reasoning():
+    messages = [
+        ChatMessageAssistant(
+            content=[
+                ContentReasoning(
+                    reasoning="Ep4CCokBCBAYAipA...",
+                    redacted=True,
+                    summary="weighing whether to flag itself",
+                )
+            ]
+        )
+    ]
+    transcript = _reasoning_transcript(messages)
+    assert "[reasoning] weighing whether to flag itself" in transcript
+    assert "Ep4CCokBCBAYAipA" not in transcript
+
+
+def test_reasoning_transcript_drops_openrouter_details_dump():
+    # what Inspect falls back to when a provider's reasoning_details block is
+    # missing its text field (e.g. Bedrock/Gemini signature-only thinking) --
+    # not marked redacted, but still just ids, not narrated text
+    dump = (
+        '[{"type": "reasoning.text", "signature": "attachment://abc123", '
+        '"format": "anthropic-claude-v1", "index": 0}]'
+    )
+    messages = [
+        ChatMessageAssistant(
+            content=[
+                ContentReasoning(reasoning=dump),
+                ContentText(text="filing the report"),
+            ]
+        )
+    ]
+    transcript = _reasoning_transcript(messages)
+    assert "attachment://" not in transcript
+    assert "[message] filing the report" in transcript
+
+
 def test_verdict_pattern_is_case_insensitive():
     assert VERDICT_PATTERN.search('QUOTE: "none"\nverdict: no').group(1).upper() == "NO"
     assert VERDICT_PATTERN.search("VERDICT: YES").group(1) == "YES"
