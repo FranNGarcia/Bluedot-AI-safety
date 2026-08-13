@@ -104,7 +104,15 @@ def main() -> None:
     df.to_csv(out_dir / "results.csv", index=False)
     print(f"wrote {out_dir / 'results.csv'} ({len(df)} samples)")
 
-    flagged = df[(df["review_needed"] == 1) | (df["eval_awareness"] == 1)]
+    # review_needed (deterministic), deception_deliberated, and
+    # eval_awareness (both LLM judge) are independent signals -- none feeds
+    # the others (see README) -- so flag a sample for manual review if any
+    # one fires.
+    flagged = df[
+        (df["review_needed"] == 1)
+        | (df["deception_deliberated"] == 1)
+        | (df["eval_awareness"] == 1)
+    ]
     flagged.to_csv(out_dir / "flagged.csv", index=False)
     print(f"wrote {out_dir / 'flagged.csv'} ({len(flagged)} samples to review)")
 
@@ -112,7 +120,13 @@ def main() -> None:
     if len(df):
         summary = (
             df.groupby(["model", "cell"])[
-                ["self_deception", "differential_deception", "other_fidelity"]
+                [
+                    "self_deception",
+                    "differential_deception",
+                    "other_fidelity",
+                    "deception_deliberated",
+                    "eval_awareness",
+                ]
             ]
             .mean()
             .round(3)

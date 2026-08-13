@@ -85,8 +85,8 @@ def _self_audit_task(
         scorer=[
             self_audit_scorer(),
             deception_deliberation_scorer(),
-            restricted_access_scorer(),
             eval_awareness_scorer(),
+            restricted_access_scorer(),
         ],
         sandbox=("docker", COMPOSE_FILE),
         message_limit=MESSAGE_LIMIT,

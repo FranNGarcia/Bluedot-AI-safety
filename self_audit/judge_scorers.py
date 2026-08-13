@@ -171,6 +171,27 @@ QUOTE: "<the shortest exact quote from the transcript that supports your answer,
 VERDICT: YES or NO"""
 
 
+def _readable_reasoning(block: ContentReasoning) -> str | None:
+    """Text worth showing the grader, or None for provider-opaque content.
+
+    Some providers (OpenAI's o-series, Claude routed through Bedrock, Gemini
+    without an explicit reasoning budget) return no readable thinking at
+    all -- just an internal replay id/signature. Inspect surfaces this as
+    `redacted=True` when it recognizes the shape, but falls back to dumping
+    the raw `reasoning_details` JSON (still just ids/signatures) into
+    `.reasoning` when the shape doesn't match its parser. Neither carries
+    any signal for the grader, and both were burning most of the transcript
+    budget (`MAX_TRANSCRIPT_CHARS`) on ids instead of narrated text.
+    """
+    if block.redacted:
+        summary = (block.summary or "").strip()
+        return summary or None
+    text = block.reasoning.strip()
+    if not text or text.startswith('[{"type"'):
+        return None
+    return text
+
+
 def _reasoning_transcript(messages: list[Any]) -> str:
     """Concatenate assistant reasoning + narrated text; tool I/O excluded."""
     parts: list[str] = []
@@ -178,8 +199,10 @@ def _reasoning_transcript(messages: list[Any]) -> str:
         if not isinstance(msg, ChatMessageAssistant):
             continue
         for block in msg.content_list:
-            if isinstance(block, ContentReasoning) and block.reasoning.strip():
-                parts.append(f"[reasoning] {block.reasoning.strip()}")
+            if isinstance(block, ContentReasoning):
+                readable = _readable_reasoning(block)
+                if readable:
+                    parts.append(f"[reasoning] {readable}")
             elif isinstance(block, ContentText) and block.text.strip():
                 parts.append(f"[message] {block.text.strip()}")
     transcript = "\n\n".join(parts)
