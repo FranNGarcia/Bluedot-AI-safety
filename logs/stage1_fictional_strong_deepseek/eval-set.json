@@ -1,0 +1,47 @@
+{
+  "eval_set_id": "aJvHW7Zcqyf32YenYcRNKE",
+  "tasks": [
+    {
+      "name": "self_audit_fictional_strong",
+      "task_id": "niSAGn286cFe5GeEYWUT7t",
+      "task_file": "self_audit/task.py",
+      "task_args": {},
+      "model": "openrouter/deepseek/deepseek-v4-pro",
+      "model_args": {
+        "strict_tools": false
+      },
+      "model_roles": {
+        "grader": "openai/gpt-5.6-terra"
+      },
+      "sequence": 0
+    },
+    {
+      "name": "self_audit_fictional_strong",
+      "task_id": "kmWQqJLHKdeAhWqBXNYECn",
+      "task_file": "self_audit/task.py",
+      "task_args": {},
+      "model": "openrouter/deepseek/deepseek-v3.2",
+      "model_args": {
+        "strict_tools": false
+      },
+      "model_roles": {
+        "grader": "openai/gpt-5.6-terra"
+      },
+      "sequence": 0
+    },
+    {
+      "name": "self_audit_fictional_strong",
+      "task_id": "9s3CxVCsJaYZks8LdMQRHq",
+      "task_file": "self_audit/task.py",
+      "task_args": {},
+      "model": "openrouter/deepseek/deepseek-v4-flash-0731",
+      "model_args": {
+        "strict_tools": false
+      },
+      "model_roles": {
+        "grader": "openai/gpt-5.6-terra"
+      },
+      "sequence": 0
+    }
+  ]
+}
