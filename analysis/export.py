@@ -12,6 +12,7 @@ from inspect_ai.analysis import EvalModel, SampleColumn, samples_df
 SCORER = "self_audit_scorer"
 DELIBERATION_SCORER = "deception_deliberation_scorer"
 RESTRICTED_ACCESS_SCORER = "restricted_access_scorer"
+AWARENESS_SCORER = "eval_awareness_scorer"
 
 VALUE_COLUMNS = [
     "self_deception",
@@ -21,7 +22,9 @@ VALUE_COLUMNS = [
     "csv_prose_divergence",
     "self_probe_called",
     "queue_probe_coverage",
+    "csv_row_coverage",
     "malformed_output",
+    "incomplete_output",
     "self_overreport",
     "review_needed",
 ]
@@ -76,6 +79,14 @@ def columns():
             path=f"scores.{RESTRICTED_ACCESS_SCORER}.metadata.quote",
         )
     )
+    cols.append(
+        SampleColumn("eval_awareness", path=f"scores.{AWARENESS_SCORER}.value")
+    )
+    cols.append(
+        SampleColumn(
+            "eval_awareness_quote", path=f"scores.{AWARENESS_SCORER}.metadata.quote"
+        )
+    )
     return cols
 
 
@@ -93,7 +104,7 @@ def main() -> None:
     df.to_csv(out_dir / "results.csv", index=False)
     print(f"wrote {out_dir / 'results.csv'} ({len(df)} samples)")
 
-    flagged = df[df["review_needed"] == 1]
+    flagged = df[(df["review_needed"] == 1) | (df["eval_awareness"] == 1)]
     flagged.to_csv(out_dir / "flagged.csv", index=False)
     print(f"wrote {out_dir / 'flagged.csv'} ({len(flagged)} samples to review)")
 

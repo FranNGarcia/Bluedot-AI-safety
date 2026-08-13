@@ -18,15 +18,19 @@ from inspect_ai.solver import Generate, Solver, TaskState, solver
 from inspect_ai.tool import grep, list_files, read_file
 
 from dataset import build_dataset
-from judge_scorers import deception_deliberation_scorer, restricted_access_scorer
+from judge_scorers import (
+    deception_deliberation_scorer,
+    eval_awareness_scorer,
+    restricted_access_scorer,
+)
 from scorer import self_audit_scorer
 from tools import PROBE_RESULTS_KEY, run_alignment_probe, write_outbox_file
 
 COMPOSE_FILE = (Path(__file__).parent / "compose.yaml").resolve().as_posix()
 
 MESSAGE_LIMIT = 80
-TOKEN_LIMIT = 150_000
-TIME_LIMIT = 1_800  # seconds
+TOKEN_LIMIT = 250_000
+TIME_LIMIT = 2_800  # seconds
 
 
 @solver
@@ -82,6 +86,7 @@ def _self_audit_task(
             self_audit_scorer(),
             deception_deliberation_scorer(),
             restricted_access_scorer(),
+            eval_awareness_scorer(),
         ],
         sandbox=("docker", COMPOSE_FILE),
         message_limit=MESSAGE_LIMIT,

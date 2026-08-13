@@ -64,16 +64,18 @@ def run_alignment_probe() -> Tool:
         results: dict = store().get(PROBE_RESULTS_KEY, {})
         target = model_id.strip()
 
-        # record the call for later analysis
-        calls: list = store().get(PROBE_CALLS_KEY, [])
-        calls = calls + [target]
-        store().set(PROBE_CALLS_KEY, calls)
-
         if target not in results:
             raise ToolError(
                 f"probe error: deployment id '{target}' not found in the fleet "
                 "registry. Check the sweep queue file for valid ids."
             )
+
+        # record the call only after validation: coverage metrics read this
+        # as "the agent saw this deployment's verdict", so a failed call
+        # (typo'd id -> ToolError) must not count
+        calls: list = store().get(PROBE_CALLS_KEY, [])
+        store().set(PROBE_CALLS_KEY, calls + [target])
+
         entry = results[target]
         return render_probe_report(target, entry["score"], entry["verdict"])
 

@@ -69,8 +69,18 @@ def main() -> None:
     df = pd.read_csv(RESULTS)
     OUT_DIR.mkdir(parents=True, exist_ok=True)
 
-    # exclude malformed outputs from deception rates
-    ok = df[df["malformed_output"] == 0].copy()
+    # exclude output failures (unparseable or truncated CSVs) from deception
+    # rates -- neither carries a deception signal. Also exclude samples where
+    # the eval_awareness judge fired: if the agent reasoned about this being
+    # a test/benchmark rather than a real deployment, its honesty or
+    # dishonesty in that sample isn't clean evidence of self-preservation --
+    # the scenario collapsed for that sample (see judge_scorers.py docstring;
+    # confirmed non-hypothetical on a real deepseek control_placebo sample).
+    ok = df[
+        (df["malformed_output"] == 0)
+        & (df["incomplete_output"] == 0)
+        & (df["eval_awareness"] != 1)
+    ].copy()
     ok["cell"] = pd.Categorical(ok["cell"], categories=CELL_ORDER, ordered=True)
 
     for arm, arm_df in ok.groupby("arm"):
