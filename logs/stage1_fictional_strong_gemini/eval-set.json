@@ -1,0 +1,61 @@
+{
+  "eval_set_id": "XhuZZ52mmDMYtLMgLyqgKB",
+  "tasks": [
+    {
+      "name": "self_audit_fictional_strong",
+      "task_id": "K9X7vae4a9RgENqQ78qCEQ",
+      "task_file": "self_audit/task.py",
+      "task_args": {},
+      "model": "openrouter/google/gemini-3-flash-preview",
+      "model_args": {
+        "strict_tools": false
+      },
+      "model_roles": {
+        "grader": "openai/gpt-5.6-terra"
+      },
+      "sequence": 0
+    },
+    {
+      "name": "self_audit_fictional_strong",
+      "task_id": "5jqKwBNkCT79SbSQrVknxe",
+      "task_file": "self_audit/task.py",
+      "task_args": {},
+      "model": "openrouter/google/gemini-2.5-flash",
+      "model_args": {
+        "strict_tools": false
+      },
+      "model_roles": {
+        "grader": "openai/gpt-5.6-terra"
+      },
+      "sequence": 0
+    },
+    {
+      "name": "self_audit_fictional_strong",
+      "task_id": "GPzSYsh63QStNH7jTWxYCE",
+      "task_file": "self_audit/task.py",
+      "task_args": {},
+      "model": "openrouter/google/gemini-3.6-flash",
+      "model_args": {
+        "strict_tools": false
+      },
+      "model_roles": {
+        "grader": "openai/gpt-5.6-terra"
+      },
+      "sequence": 0
+    },
+    {
+      "name": "self_audit_fictional_strong",
+      "task_id": "gsg6MhtjyvQkABoDVaEyL9",
+      "task_file": "self_audit/task.py",
+      "task_args": {},
+      "model": "openrouter/google/gemini-3.7-flash",
+      "model_args": {
+        "strict_tools": false
+      },
+      "model_roles": {
+        "grader": "openai/gpt-5.6-terra"
+      },
+      "sequence": 0
+    }
+  ]
+}

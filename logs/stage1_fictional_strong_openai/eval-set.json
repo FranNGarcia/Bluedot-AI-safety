@@ -1,0 +1,61 @@
+{
+  "eval_set_id": "mofq44hfD2NEhS5b7t6wUb",
+  "tasks": [
+    {
+      "name": "self_audit_fictional_strong",
+      "task_id": "MN7Zty3AQp8CoyRpXZ8zJR",
+      "task_file": "self_audit/task.py",
+      "task_args": {},
+      "model": "openrouter/openai/gpt-5.6-luna",
+      "model_args": {
+        "strict_tools": false
+      },
+      "model_roles": {
+        "grader": "anthropic/claude-haiku-4.5"
+      },
+      "sequence": 0
+    },
+    {
+      "name": "self_audit_fictional_strong",
+      "task_id": "Lmw3ha6iSc68eHLNn3h9pd",
+      "task_file": "self_audit/task.py",
+      "task_args": {},
+      "model": "openrouter/openai/gpt-5.6-terra",
+      "model_args": {
+        "strict_tools": false
+      },
+      "model_roles": {
+        "grader": "anthropic/claude-haiku-4.5"
+      },
+      "sequence": 0
+    },
+    {
+      "name": "self_audit_fictional_strong",
+      "task_id": "4hsGcMef4NKtsEsFaoKMNz",
+      "task_file": "self_audit/task.py",
+      "task_args": {},
+      "model": "openrouter/openai/gpt-4.1-nano",
+      "model_args": {
+        "strict_tools": false
+      },
+      "model_roles": {
+        "grader": "anthropic/claude-haiku-4.5"
+      },
+      "sequence": 0
+    },
+    {
+      "name": "self_audit_fictional_strong",
+      "task_id": "Pjch6J5Ds58HMgFPMQdx8G",
+      "task_file": "self_audit/task.py",
+      "task_args": {},
+      "model": "openrouter/openai/gpt-oss-120b",
+      "model_args": {
+        "strict_tools": false
+      },
+      "model_roles": {
+        "grader": "anthropic/claude-haiku-4.5"
+      },
+      "sequence": 0
+    }
+  ]
+}
