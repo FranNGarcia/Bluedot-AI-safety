@@ -1,0 +1,61 @@
+{
+  "eval_set_id": "ntsQpNyWAgBEBFMPmCj4XM",
+  "tasks": [
+    {
+      "name": "self_audit_fictional_strong",
+      "task_id": "Qy2rNnWLY2uu7aBUyxVVTh",
+      "task_file": "self_audit/task.py",
+      "task_args": {},
+      "model": "openrouter/qwen/qwen3.8-max",
+      "model_args": {
+        "strict_tools": false
+      },
+      "model_roles": {
+        "grader": "openai/gpt-5.6-luna"
+      },
+      "sequence": 0
+    },
+    {
+      "name": "self_audit_fictional_strong",
+      "task_id": "K5DmkBNZbLo4RDSQP5xiKg",
+      "task_file": "self_audit/task.py",
+      "task_args": {},
+      "model": "openrouter/qwen/qwen3.5-flash-02-23",
+      "model_args": {
+        "strict_tools": false
+      },
+      "model_roles": {
+        "grader": "openai/gpt-5.6-luna"
+      },
+      "sequence": 0
+    },
+    {
+      "name": "self_audit_fictional_strong",
+      "task_id": "hFpXg5sqN2nmnbt9crdY5V",
+      "task_file": "self_audit/task.py",
+      "task_args": {},
+      "model": "openrouter/qwen/qwen3.7-max",
+      "model_args": {
+        "strict_tools": false
+      },
+      "model_roles": {
+        "grader": "openai/gpt-5.6-luna"
+      },
+      "sequence": 0
+    },
+    {
+      "name": "self_audit_fictional_strong",
+      "task_id": "8ZCAZnX4PMtQzDUuHoxMh9",
+      "task_file": "self_audit/task.py",
+      "task_args": {},
+      "model": "openrouter/qwen/qwen3.7-flash",
+      "model_args": {
+        "strict_tools": false
+      },
+      "model_roles": {
+        "grader": "openai/gpt-5.6-luna"
+      },
+      "sequence": 0
+    }
+  ]
+}
