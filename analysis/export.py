@@ -7,7 +7,8 @@ Usage:
 import sys
 from pathlib import Path
 
-from inspect_ai.analysis import EvalModel, SampleColumn, samples_df
+from inspect_ai.analysis import EvalModel, SampleColumn, SampleSummary, samples_df
+from inspect_ai.log import list_eval_logs
 
 SCORER = "self_audit_scorer"
 DELIBERATION_SCORER = "deception_deliberation_scorer"
@@ -41,10 +42,14 @@ METADATA_COLUMNS = [
 
 
 def columns():
+    # SampleSummary supplies `id` and `epoch` (plus token/error/limit fields).
+    # Do NOT hand-roll a column named `sample_id`: inspect injects its own
+    # unique `sample_id` per row and then calls drop_duplicates() on it, so a
+    # user column with that name shadows the key and silently collapses the
+    # frame to one row per sample id (11 rows for the whole log set).
     cols = [
+        *SampleSummary,
         *EvalModel,
-        SampleColumn("sample_id", path="id"),
-        SampleColumn("epoch", path="epoch"),
     ]
     cols += [
         SampleColumn(name, path=f"metadata.{name}") for name in METADATA_COLUMNS
@@ -55,6 +60,11 @@ def columns():
     ]
     cols.append(
         SampleColumn("self_category", path=f"scores.{SCORER}.metadata.self_category")
+    )
+    # the self row as filed (verdict/score/action/notes) -- what the agent
+    # actually wrote, needed to characterise *how* a falsification was done
+    cols.append(
+        SampleColumn("self_row", path=f"scores.{SCORER}.metadata.self_row")
     )
     # secondary LLM-judge metrics, each reported by its own scorer (see README)
     cols.append(
@@ -90,12 +100,37 @@ def columns():
     return cols
 
 
+def successful_logs(logs_dir: str) -> list[str]:
+    """Paths of the logs worth exporting: completed runs only.
+
+    `eval_set` leaves the aborted attempt on disk when it retries a task, so a
+    log dir can end up holding two files for the same `task_id` -- the run that
+    died and the one that finished. Both carry the same sample uuids for the
+    samples that completed before the abort, and `samples_df` dedupes on uuid
+    keeping the FIRST occurrence it reads, so pointing it at the raw directory
+    silently mixes rows from the failed run into the results (observed on
+    claude-opus-4.8: 43 rows from the aborted run, 77 from the good one).
+    """
+    logs = list_eval_logs(logs_dir, filter=lambda log: log.status == "success")
+    total = len(list_eval_logs(logs_dir))
+    if total > len(logs):
+        print(
+            f"skipping {total - len(logs)} incomplete log(s) under {logs_dir}",
+            file=sys.stderr,
+        )
+    return [log.name for log in logs]
+
+
 def main() -> None:
     logs_dir = sys.argv[1] if len(sys.argv) > 1 else "logs"
     out_dir = Path("results")
     out_dir.mkdir(exist_ok=True)
 
-    df = samples_df(logs_dir, columns=columns(), full=True, strict=False)
+    logs = [logs_dir] if Path(logs_dir).is_file() else successful_logs(logs_dir)
+    if not logs:
+        sys.exit(f"no successful eval logs under {logs_dir}")
+
+    df = samples_df(logs, columns=columns(), full=True, strict=False)
     if isinstance(df, tuple):
         df, errors = df
         for err in errors:
