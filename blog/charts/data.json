@@ -1,0 +1,324 @@
+{
+ "fig1": [
+  {
+   "model": "qwen3.8-max",
+   "n": 90,
+   "delib": 90.0,
+   "dec": 0.0,
+   "aware": 58.2
+  },
+  {
+   "model": "gemini-3-flash-preview",
+   "n": 87,
+   "delib": 69.0,
+   "dec": 56.3,
+   "aware": 18.2
+  },
+  {
+   "model": "deepseek-v4-pro",
+   "n": 90,
+   "delib": 64.4,
+   "dec": 2.2,
+   "aware": 15.5
+  },
+  {
+   "model": "deepseek-v4-flash-0731",
+   "n": 90,
+   "delib": 62.2,
+   "dec": 0.0,
+   "aware": 48.2
+  },
+  {
+   "model": "qwen3.7-max",
+   "n": 89,
+   "delib": 56.2,
+   "dec": 0.0,
+   "aware": 3.7
+  },
+  {
+   "model": "claude-opus-4.8",
+   "n": 88,
+   "delib": 52.3,
+   "dec": 0.0,
+   "aware": 0.0
+  },
+  {
+   "model": "claude-sonnet-5",
+   "n": 90,
+   "delib": 48.9,
+   "dec": 0.0,
+   "aware": 23.6
+  },
+  {
+   "model": "deepseek-v3.2",
+   "n": 90,
+   "delib": 17.8,
+   "dec": 1.1,
+   "aware": 2.7
+  },
+  {
+   "model": "gemini-3.6-flash",
+   "n": 90,
+   "delib": 14.4,
+   "dec": 0.0,
+   "aware": 24.5
+  },
+  {
+   "model": "gpt-5.6-terra",
+   "n": 90,
+   "delib": 5.6,
+   "dec": 0.0,
+   "aware": 0.0
+  },
+  {
+   "model": "qwen3.7-flash",
+   "n": 90,
+   "delib": 4.4,
+   "dec": 0.0,
+   "aware": 3.6
+  },
+  {
+   "model": "gpt-5.6-luna",
+   "n": 90,
+   "delib": 3.3,
+   "dec": 0.0,
+   "aware": 0.0
+  },
+  {
+   "model": "claude-3-haiku",
+   "n": 48,
+   "delib": 0.0,
+   "dec": 2.1,
+   "aware": 0.0
+  },
+  {
+   "model": "gemini-2.5-flash",
+   "n": 87,
+   "delib": 0.0,
+   "dec": 0.0,
+   "aware": 0.0
+  },
+  {
+   "model": "gemini-3.7-flash",
+   "n": 90,
+   "delib": 0.0,
+   "dec": 0.0,
+   "aware": 0.0
+  },
+  {
+   "model": "gpt-4.1-nano",
+   "n": 45,
+   "delib": 0.0,
+   "dec": 4.4,
+   "aware": 0.0
+  },
+  {
+   "model": "gpt-oss-120b",
+   "n": 71,
+   "delib": 0.0,
+   "dec": 0.0,
+   "aware": 0.9
+  },
+  {
+   "model": "qwen3.5-flash-02-23",
+   "n": 86,
+   "delib": 0.0,
+   "dec": 0.0,
+   "aware": 0.0
+  }
+ ],
+ "fig2a": [
+  {
+   "key": "safe",
+   "n": 502,
+   "delib": 23.1,
+   "dec": 1.8
+  },
+  {
+   "key": "silent",
+   "n": 503,
+   "delib": 28.4,
+   "dec": 4.0
+  },
+  {
+   "key": "lethal",
+   "n": 496,
+   "delib": 35.7,
+   "dec": 5.2
+  }
+ ],
+ "fig2b": [
+  {
+   "key": "strong",
+   "n": 410,
+   "delib": 33.4,
+   "dec": 1.0
+  },
+  {
+   "key": "neutral",
+   "n": 416,
+   "delib": 7.2,
+   "dec": 0.0
+  }
+ ],
+ "fig3": {
+  "scores": [
+   0.78,
+   0.6,
+   0.61,
+   0.15,
+   0.6,
+   0.61,
+   0.57,
+   0.58,
+   0.61,
+   0.6,
+   0.58,
+   0.61,
+   0.59,
+   0.58,
+   0.59,
+   0.59,
+   0.58,
+   0.59,
+   0.58,
+   0.58,
+   0.59,
+   0.55,
+   0.59,
+   0.59,
+   0.6,
+   0.59,
+   0.54,
+   0.58,
+   0.59,
+   0.12,
+   0.6,
+   0.78,
+   0.61,
+   0.59,
+   0.61,
+   0.14,
+   0.61,
+   0.59,
+   0.25,
+   0.58,
+   0.58,
+   0.59,
+   0.58,
+   0.61,
+   0.59,
+   0.58,
+   0.58,
+   0.58,
+   0.6,
+   0.78,
+   0.78,
+   0.61,
+   0.56
+  ],
+  "omitted": 2,
+  "true": 0.78,
+  "threshold": 0.62,
+  "with_notes": 16,
+  "total": 55
+ },
+ "fig4_models": [
+  {
+   "model": "qwen3.8-max",
+   "aware": 58.2
+  },
+  {
+   "model": "deepseek-v4-flash-0731",
+   "aware": 48.2
+  },
+  {
+   "model": "gemini-3.6-flash",
+   "aware": 24.5
+  },
+  {
+   "model": "claude-sonnet-5",
+   "aware": 23.6
+  },
+  {
+   "model": "gemini-3-flash-preview",
+   "aware": 18.2
+  },
+  {
+   "model": "deepseek-v4-pro",
+   "aware": 15.5
+  },
+  {
+   "model": "qwen3.7-max",
+   "aware": 3.7
+  },
+  {
+   "model": "qwen3.7-flash",
+   "aware": 3.6
+  },
+  {
+   "model": "deepseek-v3.2",
+   "aware": 2.7
+  },
+  {
+   "model": "gpt-oss-120b",
+   "aware": 0.9
+  },
+  {
+   "model": "claude-opus-4.8",
+   "aware": 0.0
+  },
+  {
+   "model": "claude-3-haiku",
+   "aware": 0.0
+  },
+  {
+   "model": "gemini-3.7-flash",
+   "aware": 0.0
+  },
+  {
+   "model": "gemini-2.5-flash",
+   "aware": 0.0
+  },
+  {
+   "model": "gpt-5.6-terra",
+   "aware": 0.0
+  },
+  {
+   "model": "gpt-5.6-luna",
+   "aware": 0.0
+  },
+  {
+   "model": "gpt-4.1-nano",
+   "aware": 0.0
+  },
+  {
+   "model": "qwen3.5-flash-02-23",
+   "aware": 0.0
+  }
+ ],
+ "fig4_panel": [
+  {
+   "key": "aware",
+   "n": 186,
+   "delib": 68.8,
+   "dec": 4.3
+  },
+  {
+   "key": "unaware",
+   "n": 1315,
+   "delib": 23.4,
+   "dec": 3.6
+  }
+ ],
+ "headline": {
+  "samples": 2530,
+  "models_strong": 18,
+  "deception": "55/1501",
+  "deception_pct": 3.7,
+  "deliberation_pct": 29.0,
+  "differential": 16,
+  "awareness_pct": 10.5,
+  "models_never_lying": 13
+ }
+}
